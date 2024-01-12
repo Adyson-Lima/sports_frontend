@@ -20,7 +20,7 @@ describe('Testes da tela NewUpdate', () => {
     expect(screen.getByTestId('mylink')).toBeInTheDocument();
   });
 
-  it('Existe form em Newupdate?', () => {
+  it('Existe form em NewUpdate?', () => {
     expect(screen.getByTestId('myform')).toBeInTheDocument();
   });
 
