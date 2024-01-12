@@ -1,8 +1,17 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import React,{useState, useEffect} from "react";
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Sports(){
+
+  const[my_sports, setSports] = useState([]);
+  const navigate = useNavigate();
+
+  // Read, busca todos os dados na api
+  useEffect(() => {
+    api.get('api/v1/sports',{})
+    .then(response => {setSports(response.data)})
+  }, []);
 
   return(
 
@@ -18,27 +27,30 @@ export default function Sports(){
         <table data-testid="mytable" className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td>
+            {my_sports.map(sport => (
+              <tr key={sport.id}>
+                <th scope="row">{sport.id}</th>
+                  <td>{sport.name}</td>
+                  <td>{sport.description}</td>
+                  <td>
 
-                  <button data-testid="mybtn1" type="button"
-                  className="btn btn-outline-info">Editar</button>
+                    <button data-testid="mybtn1" type="button"
+                    className="btn btn-outline-info">Editar</button>
 
-                  <button data-testid="mybtn2" type="button"
-                  className="btn btn-outline-danger">Excluir</button>
+                    <button data-testid="mybtn2" type="button"
+                    className="btn btn-outline-danger">Excluir</button>
 
-                </td>
-            </tr>
+                  </td>
+              </tr>
+            ))}
+            
           </tbody>
         </table>
 
