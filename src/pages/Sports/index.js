@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import React,{useState, useEffect} from "react";
 import api from '../../services/api';
+import { Alert } from "bootstrap";
 
 export default function Sports(){
 
@@ -12,6 +13,15 @@ export default function Sports(){
     api.get('api/v1/sports',{})
     .then(response => {setSports(response.data)})
   }, []);
+
+  // Update, navega para tela de atualização
+  async function updateSport(id){
+    try {
+      navigate(`/newupdate/${id}`);      
+    } catch (error) {
+      alert("Erro ao navegar");      
+    }
+  }
 
   return(
 
@@ -42,7 +52,8 @@ export default function Sports(){
                   <td>
 
                     <button data-testid="mybtn1" type="button"
-                    className="btn btn-outline-info">Editar</button>
+                    className="btn btn-outline-info" style={{margin: '2px'}}
+                    onClick={() => updateSport(sport.id)}>Editar</button>
 
                     <button data-testid="mybtn2" type="button"
                     className="btn btn-outline-danger">Excluir</button>
