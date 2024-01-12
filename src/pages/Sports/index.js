@@ -1,7 +1,6 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React,{useState, useEffect} from "react";
 import api from '../../services/api';
-import { Alert } from "bootstrap";
 
 export default function Sports(){
 
